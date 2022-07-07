@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useContext, useState, useEffect, Fragment } from "react";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
@@ -10,10 +10,11 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
-import Snackbar from "@mui/material/Snackbar";
 
 import { EditRow } from "./EditRow";
 import { ReadRow } from "./ReadRow";
+
+import { SnackbarContext } from "../../contexts/SnackbarContext";
 
 import { apiRequest } from "../../helpers/api-request";
 
@@ -22,22 +23,15 @@ import { updateUser, deleteUser } from "../../actions/userActions";
 import "../../styles/table.scss";
 
 export const MuiTable = () => {
+  const { setSnackbar } = useContext(SnackbarContext);
+
   const [apiData, setApiData] = useState([]);
-
   const [editId, setEditId] = useState(null);
-
   const [deleteId, setDeleteId] = useState(null);
-
+  const [openDialog, setOpenDialog] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-  });
-
-  const [openDialog, setOpenDialog] = useState(false);
-
-  const [snackbar, setSnackbar] = useState({
-    open: false,
-    message: "",
   });
 
   useEffect(() => {
@@ -162,13 +156,6 @@ export const MuiTable = () => {
           <span>No users found.</span>
         </div>
       )}
-      <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        open={snackbar.open}
-        onClose={() => setSnackbar({ open: false, message: "" })}
-        message={snackbar.message}
-        autoHideDuration={3000}
-      />
     </>
   );
 };
