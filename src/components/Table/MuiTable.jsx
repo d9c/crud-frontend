@@ -10,6 +10,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { EditRow } from "./EditRow";
 import { ReadRow } from "./ReadRow";
@@ -25,6 +26,7 @@ import "../../styles/table.scss";
 export const MuiTable = () => {
   const { setSnackbar } = useContext(SnackbarContext);
 
+  const [loading, setLoading] = useState(true);
   const [apiData, setApiData] = useState([]);
   const [editId, setEditId] = useState(null);
   const [deleteId, setDeleteId] = useState(null);
@@ -35,9 +37,10 @@ export const MuiTable = () => {
   });
 
   useEffect(() => {
-    apiRequest("https://d9c-crud.herokuapp.com/users").then((data) =>
-      setApiData(data)
-    );
+    apiRequest("https://d9c-crud.herokuapp.com/users").then((data) => {
+      setApiData(data);
+      setLoading(false);
+    });
   }, [editId, deleteId]);
 
   const handleChange = (e) => {
@@ -63,15 +66,16 @@ export const MuiTable = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setLoading(true);
+
     const updatedUser = { ...formData };
     await updateUser(updatedUser, editId);
 
+    setEditId(null);
     setSnackbar({
       open: true,
       message: "User successfully updated",
     });
-
-    setEditId(null);
   };
 
   const handlePromptDelete = (e, user) => {
@@ -85,20 +89,21 @@ export const MuiTable = () => {
   };
 
   const handleDelete = async () => {
+    setLoading(true);
+
     await deleteUser(deleteId);
 
+    setDeleteId(null);
+    setOpenDialog(false);
     setSnackbar({
       open: true,
       message: "User successfully deleted",
     });
-
-    setDeleteId(null);
-    setOpenDialog(false);
   };
 
   return (
     <>
-      {apiData.length > 0 ? (
+      {!loading && apiData.length > 0 ? (
         <div className="table-container">
           <div className="table-background">
             <form onSubmit={handleSubmit}>
@@ -153,7 +158,11 @@ export const MuiTable = () => {
         </div>
       ) : (
         <div className="no-users-found">
-          <span>No users found.</span>
+          {loading ? (
+            <CircularProgress style={{ color: "#5a7896" }} />
+          ) : (
+            <span>No users found</span>
+          )}
         </div>
       )}
     </>
