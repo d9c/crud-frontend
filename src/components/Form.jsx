@@ -51,6 +51,7 @@ export const Form = () => {
               label="Name"
               name="name"
               variant="filled"
+              size="small"
               style={{ backgroundColor: "#ffffff", width: "350px" }}
               value={formData.name}
               onChange={handleChange}
@@ -62,6 +63,7 @@ export const Form = () => {
               label="Email"
               name="email"
               variant="filled"
+              size="small"
               style={{ backgroundColor: "#ffffff", width: "350px" }}
               value={formData.email}
               onChange={handleChange}
