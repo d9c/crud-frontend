@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api = axios.create({ baseURL: "https://d9c-crud.herokuapp.com" });
+const api = axios.create({ baseURL: "https://d9c-crud-backend.herokuapp.com" });
 
 export const createUser = async (user) => {
   try {
