@@ -1,9 +1,6 @@
 import React from "react";
-import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
-import TextField from "@mui/material/TextField";
-import SaveIcon from "@mui/icons-material/Save";
-import CancelIcon from "@mui/icons-material/Cancel";
+import { TableRow, TableCell, TextField } from "@mui/material";
+import { Save as SaveIcon, Cancel as CancelIcon } from "@mui/icons-material";
 
 export const EditRow = ({ formData, handleChange, handleCancel }) => {
   return (

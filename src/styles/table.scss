@@ -22,6 +22,16 @@
   }
 }
 
+.table-footer {
+  text-align: right;
+  margin-top: 20px;
+
+  span {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.5);
+  }
+}
+
 .actions {
   display: flex;
   justify-content: right;

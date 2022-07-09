@@ -1,19 +1,16 @@
 import React, { useContext, useState, useEffect, Fragment } from "react";
-import Table from "@mui/material/Table";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
-import TableBody from "@mui/material/TableBody";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogActions from "@mui/material/DialogActions";
-import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
+import {
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  CircularProgress,
+} from "@mui/material";
 
 import { EditRow } from "./EditRow";
 import { ReadRow } from "./ReadRow";
+import { DeletePrompt } from "./DeletePrompt";
 
 import { SnackbarContext } from "../../contexts/SnackbarContext";
 
@@ -78,7 +75,7 @@ export const MuiTable = () => {
     });
   };
 
-  const handlePromptDelete = (e, user) => {
+  const handleDeletePrompt = (e, user) => {
     setDeleteId(user._id);
     setOpenDialog(true);
   };
@@ -130,31 +127,23 @@ export const MuiTable = () => {
                         <ReadRow
                           user={user}
                           handleEdit={handleEdit}
-                          handlePromptDelete={handlePromptDelete}
+                          handleDeletePrompt={handleDeletePrompt}
                         />
                       )}
                     </Fragment>
                   ))}
                 </TableBody>
               </Table>
+              <div className="table-footer">
+                <span>Total items: {apiData.length}</span>
+              </div>
             </form>
           </div>
-          <Dialog open={openDialog} onClose={handleClose}>
-            <DialogTitle>Delete item</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                Once deleted, this item cannot be recovered.
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button type="button" onClick={handleClose}>
-                Cancel
-              </Button>
-              <Button type="button" onClick={handleDelete}>
-                Delete
-              </Button>
-            </DialogActions>
-          </Dialog>
+          <DeletePrompt
+            openDialog={openDialog}
+            handleClose={handleClose}
+            handleDelete={handleDelete}
+          />
         </div>
       ) : (
         <div className="no-users-found">

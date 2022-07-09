@@ -1,10 +1,8 @@
 import React from "react";
-import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableCell";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { TableRow, TableCell } from "@mui/material";
+import { Edit as EditIcon, Delete as DeleteIcon } from "@mui/icons-material";
 
-export const ReadRow = ({ user, handleEdit, handlePromptDelete }) => {
+export const ReadRow = ({ user, handleEdit, handleDeletePrompt }) => {
   return (
     <TableRow style={{ height: "81px" }}>
       <TableCell>{user.name}</TableCell>
@@ -21,7 +19,7 @@ export const ReadRow = ({ user, handleEdit, handlePromptDelete }) => {
           <button
             type="button"
             title="Delete"
-            onClick={(e) => handlePromptDelete(e, user)}
+            onClick={(e) => handleDeletePrompt(e, user)}
           >
             <DeleteIcon style={{ color: "#787878" }} />
           </button>
