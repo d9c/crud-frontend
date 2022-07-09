@@ -34,7 +34,7 @@ export const MuiTable = () => {
   });
 
   useEffect(() => {
-    apiRequest("https://d9c-crud.herokuapp.com/users").then((data) => {
+    apiRequest("https://d9c-crud-backend.herokuapp.com/users").then((data) => {
       setApiData(data);
       setLoading(false);
     });
