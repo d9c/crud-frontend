@@ -51,13 +51,10 @@ export const MuiTable = () => {
 
   const handleEdit = (e, user) => {
     setEditId(user._id);
-
-    const newFormData = {
+    setFormData({
       name: user.name,
       email: user.email,
-    };
-
-    setFormData(newFormData);
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -65,8 +62,7 @@ export const MuiTable = () => {
 
     setLoading(true);
 
-    const updatedUser = { ...formData };
-    await updateUser(updatedUser, editId);
+    await updateUser({ ...formData }, editId);
 
     setEditId(null);
     setSnackbar({
