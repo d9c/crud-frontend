@@ -62,7 +62,8 @@ export const MuiTable = () => {
 
     setLoading(true);
 
-    await updateUser({ ...formData }, editId);
+    const updatedUser = { ...formData };
+    await updateUser(updatedUser, editId);
 
     setEditId(null);
     setSnackbar({
