@@ -1,10 +1,5 @@
 import React, { useContext, useState, useEffect, Fragment } from "react";
-import {
-  TableHead,
-  TableRow,
-  TableBody,
-  CircularProgress,
-} from "@mui/material";
+import { TableHead, TableRow, TableBody } from "@mui/material";
 
 import { EditRow } from "./EditRow";
 import { ReadRow } from "./ReadRow";
