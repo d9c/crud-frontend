@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect, Fragment } from "react";
+import axios from "axios";
 import { TableHead, TableRow, TableBody } from "@mui/material";
 
 import { EditRow } from "./EditRow";
@@ -7,8 +8,6 @@ import { DeletePrompt } from "./DeletePrompt";
 
 import { SnackbarContext } from "../../contexts/SnackbarContext";
 
-import { apiRequest } from "../../helpers/api-request";
-
 import { updateUser, deleteUser } from "../../actions/userActions";
 
 import * as C from "./styles";
@@ -16,22 +15,40 @@ import * as C from "./styles";
 export const MuiTable = () => {
   const { setSnackbar } = useContext(SnackbarContext);
 
-  const [loading, setLoading] = useState(true);
   const [apiData, setApiData] = useState([]);
-  const [editId, setEditId] = useState(null);
-  const [deleteId, setDeleteId] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [openDialog, setOpenDialog] = useState(false);
+
   const [formData, setFormData] = useState({
+    _id: "",
     name: "",
     email: "",
   });
 
   useEffect(() => {
-    apiRequest("https://d9c-crud-backend.herokuapp.com/users").then((data) => {
-      setApiData(data);
-      setLoading(false);
+    refreshScreen();
+  }, []);
+
+  const clearFormData = () => {
+    setFormData({
+      _id: "",
+      name: "",
+      email: "",
     });
-  }, [editId, deleteId]);
+  };
+
+  const refreshScreen = async () => {
+    clearFormData();
+
+    const res = await axios({
+      method: "get",
+      responseType: "json",
+      url: "https://d9c-crud-backend.herokuapp.com/users",
+    });
+
+    setApiData(res.data);
+    setLoading(false);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,9 +59,9 @@ export const MuiTable = () => {
     }));
   };
 
-  const handleEdit = (e, user) => {
-    setEditId(user._id);
+  const handleEdit = (user) => {
     setFormData({
+      _id: user._id,
       name: user.name,
       email: user.email,
     });
@@ -56,9 +73,9 @@ export const MuiTable = () => {
     setLoading(true);
 
     const updatedUser = { ...formData };
-    await updateUser(updatedUser, editId);
+    await updateUser(updatedUser, updatedUser._id);
 
-    setEditId(null);
+    refreshScreen();
     setSnackbar({
       open: true,
       message: "User successfully updated",
@@ -66,22 +83,26 @@ export const MuiTable = () => {
   };
 
   const handleDeletePrompt = (e, user) => {
-    setDeleteId(user._id);
+    setFormData({ ...formData, _id: user._id });
     setOpenDialog(true);
   };
 
-  const handleClose = () => {
-    setDeleteId(null);
+  const handleCloseDialog = () => {
+    clearFormData();
     setOpenDialog(false);
+  };
+
+  const handleCancelEdit = () => {
+    clearFormData();
   };
 
   const handleDelete = async () => {
     setLoading(true);
 
-    await deleteUser(deleteId);
+    await deleteUser(formData._id);
 
-    setDeleteId(null);
     setOpenDialog(false);
+    refreshScreen();
     setSnackbar({
       open: true,
       message: "User successfully deleted",
@@ -106,16 +127,16 @@ export const MuiTable = () => {
                   <TableBody>
                     {apiData.map((user) => (
                       <Fragment key={user._id}>
-                        {editId === user._id ? (
+                        {formData._id === user._id ? (
                           <EditRow
                             formData={formData}
                             handleChange={handleChange}
-                            handleCancel={() => setEditId(null)}
+                            handleCancel={handleCancelEdit}
                           />
                         ) : (
                           <ReadRow
                             user={user}
-                            handleEdit={handleEdit}
+                            handleEdit={() => handleEdit(user)}
                             handleDeletePrompt={handleDeletePrompt}
                           />
                         )}
@@ -131,7 +152,7 @@ export const MuiTable = () => {
           </C.Container>
           <DeletePrompt
             openDialog={openDialog}
-            handleClose={handleClose}
+            handleClose={handleCloseDialog}
             handleDelete={handleDelete}
           />
         </>

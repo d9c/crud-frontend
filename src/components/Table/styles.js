@@ -51,6 +51,7 @@ export const NoUsersFound = styled.div`
   align-items: center;
 
   span {
+    font-family: "JetBrains Mono", sans-serif;
     font-size: 14px;
     color: rgba(0, 0, 0, 0.5);
   }
