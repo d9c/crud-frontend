@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {
   Table as MuiTable,
+  TableRow as MuiTableRow,
   TableCell,
   TextField,
   CircularProgress,
@@ -98,4 +99,8 @@ export const LoadingIndicator = styled(CircularProgress)`
   && {
     color: #5a7896;
   }
+`;
+
+export const TableRow = styled(MuiTableRow)`
+  height: 81px;
 `;

@@ -8,9 +8,9 @@ import {
   Button,
 } from "@mui/material";
 
-export const DeletePrompt = ({ openDialog, handleClose, handleDelete }) => {
+export const DeletePrompt = ({ open, handleClose, handleDelete }) => {
   return (
-    <Dialog open={openDialog} onClose={handleClose}>
+    <Dialog open={open} onClose={handleClose}>
       <DialogTitle>Delete item</DialogTitle>
       <DialogContent>
         <DialogContentText>

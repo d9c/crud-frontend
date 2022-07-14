@@ -17,28 +17,25 @@ export const MuiTable = () => {
 
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [openDialog, setOpenDialog] = useState(false);
-
+  const [open, setOpen] = useState(false);
+  const [editUserId, setEditUserId] = useState("");
+  const [deleteUserId, setDeleteUserId] = useState("");
   const [formData, setFormData] = useState({
-    _id: "",
     name: "",
     email: "",
   });
 
   useEffect(() => {
-    refreshScreen();
+    refreshTable();
   }, []);
 
-  const clearFormData = () => {
+  const refreshTable = async () => {
+    setEditUserId("");
+    setDeleteUserId("");
     setFormData({
-      _id: "",
       name: "",
       email: "",
     });
-  };
-
-  const refreshScreen = async () => {
-    clearFormData();
 
     const res = await axios({
       method: "get",
@@ -60,8 +57,8 @@ export const MuiTable = () => {
   };
 
   const handleEdit = (user) => {
+    setEditUserId(user._id);
     setFormData({
-      _id: user._id,
       name: user.name,
       email: user.email,
     });
@@ -73,36 +70,35 @@ export const MuiTable = () => {
     setLoading(true);
 
     const updatedUser = { ...formData };
-    await updateUser(updatedUser, updatedUser._id);
+    await updateUser(updatedUser, editUserId);
 
-    refreshScreen();
+    refreshTable();
+
     setSnackbar({
       open: true,
       message: "User successfully updated",
     });
   };
 
-  const handleDeletePrompt = (e, user) => {
-    setFormData({ ...formData, _id: user._id });
-    setOpenDialog(true);
+  const handleDeletePrompt = (user) => {
+    setDeleteUserId(user._id);
+    setOpen(true);
   };
 
-  const handleCloseDialog = () => {
-    clearFormData();
-    setOpenDialog(false);
-  };
-
-  const handleCancelEdit = () => {
-    clearFormData();
+  const handleClose = () => {
+    setDeleteUserId("");
+    setOpen(false);
   };
 
   const handleDelete = async () => {
     setLoading(true);
 
-    await deleteUser(formData._id);
+    await deleteUser(deleteUserId);
 
-    setOpenDialog(false);
-    refreshScreen();
+    setOpen(false);
+
+    refreshTable();
+
     setSnackbar({
       open: true,
       message: "User successfully deleted",
@@ -127,17 +123,17 @@ export const MuiTable = () => {
                   <TableBody>
                     {apiData.map((user) => (
                       <Fragment key={user._id}>
-                        {formData._id === user._id ? (
+                        {editUserId === user._id ? (
                           <EditRow
                             formData={formData}
                             handleChange={handleChange}
-                            handleCancel={handleCancelEdit}
+                            handleCancel={() => setEditUserId("")}
                           />
                         ) : (
                           <ReadRow
                             user={user}
                             handleEdit={() => handleEdit(user)}
-                            handleDeletePrompt={handleDeletePrompt}
+                            handleDeletePrompt={() => handleDeletePrompt(user)}
                           />
                         )}
                       </Fragment>
@@ -151,8 +147,8 @@ export const MuiTable = () => {
             </form>
           </C.Container>
           <DeletePrompt
-            openDialog={openDialog}
-            handleClose={handleCloseDialog}
+            open={open}
+            handleClose={handleClose}
             handleDelete={handleDelete}
           />
         </>
