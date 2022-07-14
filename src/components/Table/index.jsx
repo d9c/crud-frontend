@@ -1,9 +1,7 @@
 import React, { useContext, useState, useEffect, Fragment } from "react";
 import {
-  Table,
   TableHead,
   TableRow,
-  TableCell,
   TableBody,
   CircularProgress,
 } from "@mui/material";
@@ -18,7 +16,7 @@ import { apiRequest } from "../../helpers/api-request";
 
 import { updateUser, deleteUser } from "../../actions/userActions";
 
-import "../../styles/table.scss";
+import * as C from "./styles";
 
 export const MuiTable = () => {
   const { setSnackbar } = useContext(SnackbarContext);
@@ -98,58 +96,54 @@ export const MuiTable = () => {
   return (
     <>
       {!loading && apiData.length > 0 ? (
-        <div className="table-container">
-          <div className="table-background">
+        <>
+          <C.Container>
             <form onSubmit={handleSubmit}>
-              <Table className="table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Email</TableCell>
-                    <TableCell style={{ width: "50px", textAlign: "right" }}>
-                      Actions
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {apiData.map((user) => (
-                    <Fragment key={user._id}>
-                      {editId === user._id ? (
-                        <EditRow
-                          formData={formData}
-                          handleChange={handleChange}
-                          handleCancel={() => setEditId(null)}
-                        />
-                      ) : (
-                        <ReadRow
-                          user={user}
-                          handleEdit={handleEdit}
-                          handleDeletePrompt={handleDeletePrompt}
-                        />
-                      )}
-                    </Fragment>
-                  ))}
-                </TableBody>
-              </Table>
-              <div className="table-footer">
-                <span>Total items: {apiData.length}</span>
-              </div>
+              <C.TableBackground>
+                <C.Table>
+                  <TableHead>
+                    <TableRow>
+                      <C.TableHeader>Name</C.TableHeader>
+                      <C.TableHeader>Email</C.TableHeader>
+                      <C.TableHeader actions="true">Actions</C.TableHeader>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {apiData.map((user) => (
+                      <Fragment key={user._id}>
+                        {editId === user._id ? (
+                          <EditRow
+                            formData={formData}
+                            handleChange={handleChange}
+                            handleCancel={() => setEditId(null)}
+                          />
+                        ) : (
+                          <ReadRow
+                            user={user}
+                            handleEdit={handleEdit}
+                            handleDeletePrompt={handleDeletePrompt}
+                          />
+                        )}
+                      </Fragment>
+                    ))}
+                  </TableBody>
+                </C.Table>
+                <C.TotalItems>
+                  <span>Total items: {apiData.length}</span>
+                </C.TotalItems>
+              </C.TableBackground>
             </form>
-          </div>
+          </C.Container>
           <DeletePrompt
             openDialog={openDialog}
             handleClose={handleClose}
             handleDelete={handleDelete}
           />
-        </div>
+        </>
       ) : (
-        <div className="no-users-found">
-          {loading ? (
-            <CircularProgress style={{ color: "#5a7896" }} />
-          ) : (
-            <span>No users found</span>
-          )}
-        </div>
+        <C.NoUsersFound>
+          {loading ? <C.LoadingIndicator /> : <span>No users found</span>}
+        </C.NoUsersFound>
       )}
     </>
   );

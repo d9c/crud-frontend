@@ -1,43 +1,42 @@
 import React from "react";
-import { TableRow, TableCell, TextField } from "@mui/material";
-import { Save as SaveIcon, Cancel as CancelIcon } from "@mui/icons-material";
+import { TableRow, TableCell } from "@mui/material";
+
+import * as C from "./styles";
 
 export const EditRow = ({ formData, handleChange, handleCancel }) => {
   return (
     <TableRow>
       <TableCell>
-        <TextField
+        <C.TextInput
           label="Name"
           name="name"
           variant="filled"
           size="small"
-          style={{ backgroundColor: "#ffffff" }}
           value={formData.name}
           onChange={handleChange}
           required
         />
       </TableCell>
       <TableCell>
-        <TextField
+        <C.TextInput
           label="Email"
           name="email"
           variant="filled"
           size="small"
-          style={{ backgroundColor: "#ffffff" }}
           value={formData.email}
           onChange={handleChange}
           required
         />
       </TableCell>
       <TableCell>
-        <div className="actions">
+        <C.Actions>
           <button type="submit" title="Save">
-            <SaveIcon style={{ color: "#787878" }} />
+            <C.SaveIcon />
           </button>
           <button type="button" title="Cancel" onClick={handleCancel}>
-            <CancelIcon style={{ color: "#787878" }} />
+            <C.CancelIcon />
           </button>
-        </div>
+        </C.Actions>
       </TableCell>
     </TableRow>
   );

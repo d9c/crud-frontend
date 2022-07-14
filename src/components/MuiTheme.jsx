@@ -9,7 +9,7 @@ export const MuiTheme = ({ children }) => {
       },
     },
     typography: {
-      fontFamily: "JetBrains Mono",
+      fontFamily: ["JetBrains Mono", "sans-serif"].join(","),
     },
   });
 

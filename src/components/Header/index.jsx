@@ -1,11 +1,11 @@
 import React from "react";
 
-import "../styles/header.scss";
+import * as Styled from "./styles";
 
 export const Header = () => {
   return (
-    <div className="header">
+    <Styled.Header>
       <span>CRUD</span>
-    </div>
+    </Styled.Header>
   );
 };

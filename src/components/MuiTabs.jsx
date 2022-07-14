@@ -3,7 +3,9 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Tab } from "@mui/material";
 
 import { Form } from "./Form";
-import { MuiTable } from "./Table/MuiTable";
+import { MuiTable } from "./Table";
+
+// rename this to "Tabs"
 
 export const MuiTabs = () => {
   const [value, setValue] = useState("1");

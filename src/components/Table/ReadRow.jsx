@@ -1,6 +1,7 @@
 import React from "react";
 import { TableRow, TableCell } from "@mui/material";
-import { Edit as EditIcon, Delete as DeleteIcon } from "@mui/icons-material";
+
+import * as C from "./styles";
 
 export const ReadRow = ({ user, handleEdit, handleDeletePrompt }) => {
   return (
@@ -8,22 +9,22 @@ export const ReadRow = ({ user, handleEdit, handleDeletePrompt }) => {
       <TableCell>{user.name}</TableCell>
       <TableCell>{user.email}</TableCell>
       <TableCell>
-        <div className="actions">
+        <C.Actions>
           <button
             type="button"
             title="Edit"
             onClick={(e) => handleEdit(e, user)}
           >
-            <EditIcon style={{ color: "#787878" }} />
+            <C.EditIcon />
           </button>
           <button
             type="button"
             title="Delete"
             onClick={(e) => handleDeletePrompt(e, user)}
           >
-            <DeleteIcon style={{ color: "#787878" }} />
+            <C.DeleteIcon />
           </button>
-        </div>
+        </C.Actions>
       </TableCell>
     </TableRow>
   );
