@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { Button } from "@mui/material";
 
 import { SnackbarContext } from "../../contexts/SnackbarContext";
 
