@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 
 import { SnackbarContext } from "../../contexts/SnackbarContext";
 
-import { createUser } from "../../actions/userActions";
+import { api } from "../../helpers/api";
 
 import * as C from "./styles";
 
@@ -27,7 +27,7 @@ export const Form = () => {
     e.preventDefault();
 
     const newUser = { ...formData };
-    await createUser(newUser);
+    await api.createUser(newUser);
 
     setSnackbar({
       open: true,

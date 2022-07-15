@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect, Fragment } from "react";
-import axios from "axios";
 import { TableHead, TableRow, TableBody } from "@mui/material";
 
 import { EditRow } from "../EditRow";
@@ -8,7 +7,7 @@ import { DeletePrompt } from "../DeletePrompt";
 
 import { SnackbarContext } from "../../contexts/SnackbarContext";
 
-import { updateUser, deleteUser } from "../../actions/userActions";
+import { api } from "../../helpers/api";
 
 import * as C from "./styles";
 
@@ -37,13 +36,9 @@ export const MuiTable = () => {
       email: "",
     });
 
-    const res = await axios({
-      method: "get",
-      responseType: "json",
-      url: "https://d9c-crud-backend.herokuapp.com/users",
-    });
+    const data = await api.getUsers();
+    setApiData(data);
 
-    setApiData(res.data);
     setLoading(false);
   };
 
@@ -70,7 +65,7 @@ export const MuiTable = () => {
     setLoading(true);
 
     const updatedUser = { ...formData };
-    await updateUser(updatedUser, editUserId);
+    await api.updateUser(updatedUser, editUserId);
 
     refreshTable();
 
@@ -93,7 +88,7 @@ export const MuiTable = () => {
   const handleDelete = async () => {
     setLoading(true);
 
-    await deleteUser(deleteUserId);
+    await api.deleteUser(deleteUserId);
 
     setOpen(false);
 
