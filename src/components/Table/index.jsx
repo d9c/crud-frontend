@@ -25,20 +25,12 @@ export const MuiTable = () => {
   });
 
   useEffect(() => {
-    refreshTable();
+    refreshScreen();
   }, []);
 
-  const refreshTable = async () => {
-    setEditUserId("");
-    setDeleteUserId("");
-    setFormData({
-      name: "",
-      email: "",
-    });
-
+  const refreshScreen = async () => {
     const data = await api.getUsers();
     setApiData(data);
-
     setLoading(false);
   };
 
@@ -67,7 +59,14 @@ export const MuiTable = () => {
     const updatedUser = { ...formData };
     await api.updateUser(updatedUser, editUserId);
 
-    refreshTable();
+    setEditUserId("");
+
+    setFormData({
+      name: "",
+      email: "",
+    });
+
+    refreshScreen();
 
     setSnackbar({
       open: true,
@@ -90,9 +89,11 @@ export const MuiTable = () => {
 
     await api.deleteUser(deleteUserId);
 
+    setDeleteUserId("");
+
     setOpen(false);
 
-    refreshTable();
+    refreshScreen();
 
     setSnackbar({
       open: true,
