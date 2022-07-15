@@ -30,7 +30,7 @@ export const Button = styled(MuiButton)`
 
     &:hover {
       background-color: ${(props) => props.theme.colors.secondary};
-      filter: brightness(80%);
+      filter: brightness(85%);
     }
   }
 `;

@@ -86,31 +86,31 @@ export const Actions = styled.div`
 
 export const EditIcon = styled(Edit)`
   && {
-    color: ${(props) => props.theme.colors.icon};
+    color: ${(props) => props.theme.colors.text.primary};
   }
 `;
 
 export const DeleteIcon = styled(Delete)`
   && {
-    color: ${(props) => props.theme.colors.icon};
+    color: ${(props) => props.theme.colors.text.primary};
   }
 `;
 
 export const SaveIcon = styled(Save)`
   && {
-    color: ${(props) => props.theme.colors.icon};
+    color: ${(props) => props.theme.colors.text.primary};
   }
 `;
 
 export const CancelIcon = styled(Cancel)`
   && {
-    color: ${(props) => props.theme.colors.icon};
+    color: ${(props) => props.theme.colors.text.primary};
   }
 `;
 
 export const TextInput = styled(TextField)`
   && {
-    background-color: ${(props) => props.theme.colors.primary};
+    background-color: ${(props) => props.theme.colors.background};
 
     label,
     input {
@@ -127,7 +127,7 @@ export const TextInput = styled(TextField)`
     }
 
     .MuiFilledInput-underline:after {
-      border-bottom: 1px solid ${(props) => props.theme.colors.secondary};
+      border-bottom: 2px solid ${(props) => props.theme.colors.secondary};
     }
   }
 `;

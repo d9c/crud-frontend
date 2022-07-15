@@ -13,7 +13,7 @@ import * as C from "./styles";
 export const DeletePrompt = ({ open, handleClose, handleDelete }) => {
   return (
     <C.Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Delete item</DialogTitle>
+      <DialogTitle>Delete item?</DialogTitle>
       <DialogContent>
         <DialogContentText>
           Once deleted, this item cannot be recovered.

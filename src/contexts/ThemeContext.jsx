@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react";
 
-import light from "../styles/themes/light";
+import { light } from "../styles/themes/light";
 
 export const ThemeContext = createContext({});
 

@@ -24,7 +24,7 @@ export const Form = styled.form`
 
 export const TextInput = styled(TextField)`
   && {
-    background-color: ${(props) => props.theme.colors.primary};
+    background-color: ${(props) => props.theme.colors.background};
     width: 320px;
 
     label,
@@ -42,7 +42,7 @@ export const TextInput = styled(TextField)`
     }
 
     .MuiFilledInput-underline:after {
-      border-bottom: 1px solid ${(props) => props.theme.colors.secondary};
+      border-bottom: 2px solid ${(props) => props.theme.colors.secondary};
     }
   }
 `;
@@ -56,7 +56,7 @@ export const Button = styled(MuiButton)`
 
     &:hover {
       background-color: ${(props) => props.theme.colors.secondary};
-      filter: brightness(80%);
+      filter: brightness(85%);
     }
   }
 `;

@@ -13,12 +13,12 @@ export const App = () => {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <SnackbarContextProvider>
-      <ThemeProvider theme={theme}>
-        <Header />
+    <ThemeProvider theme={theme}>
+      <Header />
+      <SnackbarContextProvider>
         <Tabs />
-        <GlobalStyle />
-      </ThemeProvider>
-    </SnackbarContextProvider>
+      </SnackbarContextProvider>
+      <GlobalStyle />
+    </ThemeProvider>
   );
 };
