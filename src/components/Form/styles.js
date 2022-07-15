@@ -27,14 +27,18 @@ export const TextInput = styled(TextField)`
     background-color: ${(props) => props.theme.colors.background};
     width: 320px;
 
-    label,
+    label {
+      font-family: "JetBrains Mono", sans-serif;
+      color: ${(props) => props.theme.colors.text.secondary};
+    }
+
     input {
       font-family: "JetBrains Mono", sans-serif;
       color: ${(props) => props.theme.colors.text.primary};
     }
 
     .MuiFilledInput-underline:before {
-      border-bottom: 1px solid ${(props) => props.theme.colors.text.primary};
+      border-bottom: 1px solid ${(props) => props.theme.colors.text.secondary};
     }
 
     .MuiFilledInput-underline:hover:before {
