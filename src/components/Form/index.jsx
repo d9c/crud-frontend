@@ -62,9 +62,9 @@ export const Form = () => {
           onChange={handleChange}
           required
         />
-        <Button type="submit" variant="contained">
+        <C.Button type="submit" variant="contained">
           Submit
-        </Button>
+        </C.Button>
       </C.Form>
     </C.Container>
   );

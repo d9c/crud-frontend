@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeProvider } from "styled-components";
 
 import { Header } from "./components/Header";
-import { MuiTheme } from "./components/MuiTheme";
-import { MuiTabs } from "./components/MuiTabs";
+import { Tabs } from "./components/Tabs";
 
+import { ThemeContext } from "./contexts/ThemeContext";
 import { SnackbarContextProvider } from "./contexts/SnackbarContext";
 
+import GlobalStyle from "./styles/global";
+
 export const App = () => {
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <div className="app">
-      <Header />
-      <MuiTheme>
-        <SnackbarContextProvider>
-          <MuiTabs />
-        </SnackbarContextProvider>
-      </MuiTheme>
-    </div>
+    <SnackbarContextProvider>
+      <ThemeProvider theme={theme}>
+        <Header />
+        <Tabs />
+        <GlobalStyle />
+      </ThemeProvider>
+    </SnackbarContextProvider>
   );
 };

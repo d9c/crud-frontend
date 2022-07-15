@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
-import Snackbar from "@mui/material/Snackbar";
+
+import * as C from "./styles";
 
 export const SnackbarContext = createContext({});
 
@@ -17,7 +18,7 @@ export const SnackbarContextProvider = ({ children }) => {
   return (
     <SnackbarContext.Provider value={{ snackbar, setSnackbar }}>
       {children}
-      <Snackbar
+      <C.Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         open={snackbar.open}
         onClose={handleClose}

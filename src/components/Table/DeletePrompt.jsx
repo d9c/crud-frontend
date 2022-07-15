@@ -8,9 +8,11 @@ import {
   Button,
 } from "@mui/material";
 
+import * as C from "./styles";
+
 export const DeletePrompt = ({ open, handleClose, handleDelete }) => {
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <C.Dialog open={open} onClose={handleClose}>
       <DialogTitle>Delete item</DialogTitle>
       <DialogContent>
         <DialogContentText>
@@ -25,6 +27,6 @@ export const DeletePrompt = ({ open, handleClose, handleDelete }) => {
           Delete
         </Button>
       </DialogActions>
-    </Dialog>
+    </C.Dialog>
   );
 };

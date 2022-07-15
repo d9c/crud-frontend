@@ -5,6 +5,7 @@ import {
   TableCell,
   TextField,
   CircularProgress,
+  Dialog as MuiDialog,
 } from "@mui/material";
 import { Edit, Delete, Save, Cancel } from "@mui/icons-material";
 
@@ -15,16 +16,24 @@ export const Container = styled.div`
 `;
 
 export const TableBackground = styled.div`
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.colors.primary};
   border-radius: 5px;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
   padding: 40px;
 `;
 
 export const Table = styled(MuiTable)`
-  tbody > tr:hover {
-    background-color: #e1e1e1;
-    transition: 50ms ease-in-out;
+  && {
+    th,
+    td {
+      font-family: "JetBrains Mono", sans-serif;
+      color: ${(props) => props.theme.colors.text.primary};
+      border-bottom: 1px solid ${(props) => props.theme.colors.border};
+    }
+
+    tbody > tr:hover {
+      background-color: ${(props) => props.theme.colors.border};
+    }
   }
 `;
 
@@ -42,7 +51,7 @@ export const TotalItems = styled.div`
   span {
     font-family: "JetBrains Mono", sans-serif;
     font-size: 14px;
-    color: rgba(0, 0, 0, 0.5);
+    color: ${(props) => props.theme.colors.text.secondary};
   }
 `;
 
@@ -54,7 +63,7 @@ export const NoUsersFound = styled.div`
   span {
     font-family: "JetBrains Mono", sans-serif;
     font-size: 14px;
-    color: rgba(0, 0, 0, 0.5);
+    color: ${(props) => props.theme.colors.text.secondary};
   }
 `;
 
@@ -76,31 +85,80 @@ export const Actions = styled.div`
 `;
 
 export const EditIcon = styled(Edit)`
-  color: #787878;
+  && {
+    color: ${(props) => props.theme.colors.icon};
+  }
 `;
 
 export const DeleteIcon = styled(Delete)`
-  color: #787878;
+  && {
+    color: ${(props) => props.theme.colors.icon};
+  }
 `;
 
 export const SaveIcon = styled(Save)`
-  color: #787878;
+  && {
+    color: ${(props) => props.theme.colors.icon};
+  }
 `;
 
 export const CancelIcon = styled(Cancel)`
-  color: #787878;
+  && {
+    color: ${(props) => props.theme.colors.icon};
+  }
 `;
 
 export const TextInput = styled(TextField)`
-  background-color: #ffffff;
+  && {
+    background-color: ${(props) => props.theme.colors.primary};
+
+    label,
+    input {
+      font-family: "JetBrains Mono", sans-serif;
+      color: ${(props) => props.theme.colors.text.primary};
+    }
+
+    .MuiFilledInput-underline:before {
+      border-bottom: 1px solid ${(props) => props.theme.colors.text.primary};
+    }
+
+    .MuiFilledInput-underline:hover:before {
+      border-bottom: 1px solid ${(props) => props.theme.colors.secondary};
+    }
+
+    .MuiFilledInput-underline:after {
+      border-bottom: 1px solid ${(props) => props.theme.colors.secondary};
+    }
+  }
 `;
 
 export const LoadingIndicator = styled(CircularProgress)`
   && {
-    color: #5a7896;
+    color: ${(props) => props.theme.colors.secondary};
   }
 `;
 
 export const TableRow = styled(MuiTableRow)`
-  height: 81px;
+  && {
+    height: 81px;
+  }
+`;
+
+export const Dialog = styled(MuiDialog)`
+  && {
+    .MuiPaper-root {
+      background-color: ${(props) => props.theme.colors.primary};
+
+      h2,
+      p,
+      button {
+        font-family: "JetBrains Mono", sans-serif;
+        color: ${(props) => props.theme.colors.text.primary};
+      }
+
+      button:hover {
+        background-color: ${(props) => props.theme.colors.secondary};
+      }
+    }
+  }
 `;

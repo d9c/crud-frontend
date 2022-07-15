@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TextField } from "@mui/material";
+import { TextField, Button as MuiButton } from "@mui/material";
 
 export const Container = styled.div`
   display: flex;
@@ -14,7 +14,7 @@ export const Form = styled.form`
   align-items: center;
   gap: 20px;
 
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.colors.primary};
   border-radius: 5px;
   box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
 
@@ -23,6 +23,40 @@ export const Form = styled.form`
 `;
 
 export const TextInput = styled(TextField)`
-  background-color: #ffffff;
-  width: 350px;
+  && {
+    background-color: ${(props) => props.theme.colors.primary};
+    width: 320px;
+
+    label,
+    input {
+      font-family: "JetBrains Mono", sans-serif;
+      color: ${(props) => props.theme.colors.text.primary};
+    }
+
+    .MuiFilledInput-underline:before {
+      border-bottom: 1px solid ${(props) => props.theme.colors.text.primary};
+    }
+
+    .MuiFilledInput-underline:hover:before {
+      border-bottom: 1px solid ${(props) => props.theme.colors.secondary};
+    }
+
+    .MuiFilledInput-underline:after {
+      border-bottom: 1px solid ${(props) => props.theme.colors.secondary};
+    }
+  }
+`;
+
+export const Button = styled(MuiButton)`
+  && {
+    font-family: "JetBrains Mono", sans-serif;
+    color: #ffffff;
+    text-transform: none;
+    background-color: ${(props) => props.theme.colors.secondary};
+
+    &:hover {
+      background-color: ${(props) => props.theme.colors.secondary};
+      filter: brightness(80%);
+    }
+  }
 `;

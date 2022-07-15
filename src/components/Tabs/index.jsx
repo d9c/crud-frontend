@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { Tab } from "@mui/material";
 
-import { Form } from "./Form";
-import { MuiTable } from "./Table";
+import { Form } from "../Form";
+import { MuiTable } from "../Table";
 
-// rename this to "Tabs"
+import * as C from "./styles";
 
-export const MuiTabs = () => {
+export const Tabs = () => {
   const [value, setValue] = useState("1");
 
   const handleChange = (e, newValue) => {
@@ -16,10 +15,10 @@ export const MuiTabs = () => {
 
   return (
     <TabContext value={value}>
-      <TabList onChange={handleChange} centered>
-        <Tab label="Register" value="1" />
-        <Tab label="Users" value="2" />
-      </TabList>
+      <C.TabList onChange={handleChange} centered>
+        <C.Tab label="Register" value="1" />
+        <C.Tab label="Users" value="2" />
+      </C.TabList>
       <TabPanel value="1">
         <Form />
       </TabPanel>
