@@ -2,9 +2,9 @@ import React, { useContext, useState, useEffect, Fragment } from "react";
 import axios from "axios";
 import { TableHead, TableRow, TableBody } from "@mui/material";
 
-import { EditRow } from "./EditRow";
-import { ReadRow } from "./ReadRow";
-import { DeletePrompt } from "./DeletePrompt";
+import { EditRow } from "../EditRow";
+import { ReadRow } from "../ReadRow";
+import { DeletePrompt } from "../DeletePrompt";
 
 import { SnackbarContext } from "../../contexts/SnackbarContext";
 

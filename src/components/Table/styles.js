@@ -1,13 +1,5 @@
 import styled from "styled-components";
-import {
-  Table as MuiTable,
-  TableRow as MuiTableRow,
-  TableCell,
-  TextField,
-  CircularProgress,
-  Dialog as MuiDialog,
-} from "@mui/material";
-import { Edit, Delete, Save, Cancel } from "@mui/icons-material";
+import { Table as MuiTable, TableCell, CircularProgress } from "@mui/material";
 
 export const Container = styled.div`
   display: flex;
@@ -67,102 +59,8 @@ export const NoUsersFound = styled.div`
   }
 `;
 
-export const Actions = styled.div`
-  display: flex;
-  justify-content: right;
-  align-items: center;
-  gap: 20px;
-
-  button {
-    background: none;
-    border: none;
-    cursor: pointer;
-
-    &:focus {
-      outline: none;
-    }
-  }
-`;
-
-export const EditIcon = styled(Edit)`
-  && {
-    color: ${(props) => props.theme.colors.text.primary};
-  }
-`;
-
-export const DeleteIcon = styled(Delete)`
-  && {
-    color: ${(props) => props.theme.colors.text.primary};
-  }
-`;
-
-export const SaveIcon = styled(Save)`
-  && {
-    color: ${(props) => props.theme.colors.text.primary};
-  }
-`;
-
-export const CancelIcon = styled(Cancel)`
-  && {
-    color: ${(props) => props.theme.colors.text.primary};
-  }
-`;
-
-export const TextInput = styled(TextField)`
-  && {
-    background-color: ${(props) => props.theme.colors.background};
-
-    label {
-      font-family: "JetBrains Mono", sans-serif;
-      color: ${(props) => props.theme.colors.text.secondary};
-    }
-
-    input {
-      font-family: "JetBrains Mono", sans-serif;
-      color: ${(props) => props.theme.colors.text.primary};
-    }
-
-    .MuiFilledInput-underline:before {
-      border-bottom: 1px solid ${(props) => props.theme.colors.text.secondary};
-    }
-
-    .MuiFilledInput-underline:hover:before {
-      border-bottom: 1px solid ${(props) => props.theme.colors.secondary};
-    }
-
-    .MuiFilledInput-underline:after {
-      border-bottom: 2px solid ${(props) => props.theme.colors.secondary};
-    }
-  }
-`;
-
 export const LoadingIndicator = styled(CircularProgress)`
   && {
     color: ${(props) => props.theme.colors.secondary};
-  }
-`;
-
-export const TableRow = styled(MuiTableRow)`
-  && {
-    height: 81px;
-  }
-`;
-
-export const Dialog = styled(MuiDialog)`
-  && {
-    .MuiPaper-root {
-      background-color: ${(props) => props.theme.colors.primary};
-
-      h2,
-      p,
-      button {
-        font-family: "JetBrains Mono", sans-serif;
-        color: ${(props) => props.theme.colors.text.primary};
-      }
-
-      button:hover {
-        background-color: ${(props) => props.theme.colors.secondary};
-      }
-    }
   }
 `;
