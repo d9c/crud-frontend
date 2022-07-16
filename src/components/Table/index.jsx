@@ -11,7 +11,7 @@ import { api } from "../../helpers/api";
 
 import * as C from "./styles";
 
-export const MuiTable = () => {
+export const Table = () => {
   const { setSnackbar } = useContext(SnackbarContext);
 
   const [apiData, setApiData] = useState([]);

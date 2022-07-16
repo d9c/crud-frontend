@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TabContext, TabPanel } from "@mui/lab";
 
 import { Form } from "../Form";
-import { MuiTable } from "../Table";
+import { Table } from "../Table";
 
 import * as C from "./styles";
 
@@ -23,7 +23,7 @@ export const Tabs = () => {
         <Form />
       </TabPanel>
       <TabPanel value="2">
-        <MuiTable />
+        <Table />
       </TabPanel>
     </TabContext>
   );
