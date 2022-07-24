@@ -18,7 +18,7 @@ export const Header = () => {
     <C.Header>
       <C.Title>CRUD</C.Title>
       <C.Button onClick={handleChangeTheme}>
-        {theme.title === "light" ? "Dark" : "Light"} Theme
+        {theme === light ? "Dark" : "Light"} Theme
       </C.Button>
     </C.Header>
   );
